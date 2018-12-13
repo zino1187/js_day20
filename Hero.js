@@ -20,8 +20,9 @@ class Hero extends GameObject{
 
 	tick(){
 		for(var i=0;i<this.sensorArray.length;i++){
-			this.sensorArray[i].tick(this.x , this.y);
-			this.sensorArray[i].render();
+			var s=this.sensorArray[i];
+			s.tick(s.x + this.velX , s.y+this.velY);
+			s.render();
 		}
 		
 		this.x+=this.velX;

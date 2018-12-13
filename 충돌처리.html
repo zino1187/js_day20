@@ -47,8 +47,14 @@ function control(){
 		case 40:hero.velY=2;break;
 	}
 }
+
 function stop(){
-	
+	if(key==37 || key==39){
+		hero.velX=0;
+	}	
+	if(key==38 || key==40){
+		hero.velY=0;
+	}
 }
 
 function gameLoop(){
