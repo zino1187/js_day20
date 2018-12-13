@@ -10,19 +10,23 @@
 	background:yellow;
 }
 </style>
+<script src="./common.js"></script>
 <script src="./GameObject.js"></script>
 <script src="./ObjectManager.js"></script>
 <script src="./Sensor.js"></script>
 <script src="./Hero.js"></script>
+<script src="./Block.js"></script>
 <script>
 var stage;
 var objectManager;
 var hero;
+var key; //가장 최근에 누른 키 정보
 
 function init(){
 	stage=document.getElementById("stage");
 	objectManager = new ObjectManager();
 	createHero();
+	createBlock();
 	gameLoop();
 }
 function createHero(){
@@ -30,6 +34,23 @@ function createHero(){
 	
 	objectManager.addObject(hero);//오브젝트 관리자에 등록!!
 }
+function createBlock(){
+	var block = new Block("BLOCK", stage,600,300,120,120,0,0,"green","");
+
+	objectManager.addObject(block);
+}
+function control(){
+	switch(key){
+		case 37:hero.velX=-2;break;
+		case 39:hero.velX=2;break;
+		case 38:hero.velY=-2;break;
+		case 40:hero.velY=2;break;
+	}
+}
+function stop(){
+	
+}
+
 function gameLoop(){
 	objectManager.tick();
 	objectManager.render();
@@ -37,6 +58,17 @@ function gameLoop(){
 }
 addEventListener("load", function(){
 	init();
+	
+	addEventListener("keydown", function(){
+		key=event.keyCode;
+		control();
+	});
+
+	addEventListener("keyup", function(){
+		key=event.keyCode;
+		stop();
+	});
+
 });
 </script>
 <title>충돌처리</title>
